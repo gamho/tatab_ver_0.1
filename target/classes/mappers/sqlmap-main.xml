@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.bit.tatab.main.dao.MainDAO"> 
+
+	<!-- 프로젝트 register -->
+    <insert id="insert" parameterType="ProjectVO">
+       insert into PRJ_T(project_no, project_name, project_comment) 
+          values(seq_prj_t_p_no.nextval, #{project_name}, #{project_comment})
+    </insert>
+  
+  	<!-- sticky note sql start -->
+  	<!-- sticky note insert -->
+  	<insert id="insertStickyNote" parameterType="StickyNoteVO">
+  		insert into STICKY_NOTE_T(no, login_email, note_title, note_content)
+  			values(seq_sticky_note_no.nextval, #{login_email}, #{note_title}, #{note_content})
+  	</insert>
+  	
+  	<!-- sticky note select -->
+  	<select id="stickyNoteFindAll" parameterType="String" resultType="StickyNoteVO">
+	  	select note_title, note_content
+	  	from sticky_note_t
+	  	where login_email = #{login_email}
+  	</select>
+  	<!-- sticky note sql end -->
+</mapper>
